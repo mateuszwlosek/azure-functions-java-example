@@ -25,36 +25,11 @@
                 <artifactId>azure-functions-java-library</artifactId>
                 <version>${azure.functions.java.library.version}</version>
             </dependency>
-            <dependency>
-                <groupId>com.microsoft.azure</groupId>
-                <artifactId>azure</artifactId>
-                <version>1.4.0</version>
-            </dependency>
-            <dependency>
-                <groupId>com.azure.resourcemanager</groupId>
-                <artifactId>azure-resourcemanager</artifactId>
-                <version>2.1.0</version>
-            </dependency>
-            <dependency>
-                <groupId>com.azure.resourcemanager</groupId>
-                <artifactId>azure-resourcemanager-authorization</artifactId>
-                <version>2.1.0</version>
-            </dependency>
-            <dependency>
-                <groupId>com.azure</groupId>
-                <artifactId>azure-identity</artifactId>
-                <version>1.2.2</version>
-            </dependency>
 
             <dependency>
                 <groupId>io.kubernetes</groupId>
                 <artifactId>client-java</artifactId>
                 <version>10.0.0</version>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.commons</groupId>
-                <artifactId>commons-lang3</artifactId>
-                <version>3.11</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -64,30 +39,10 @@
             <groupId>com.microsoft.azure.functions</groupId>
             <artifactId>azure-functions-java-library</artifactId>
         </dependency>
-        <dependency>
-            <groupId>com.microsoft.azure</groupId>
-            <artifactId>azure</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.azure.resourcemanager</groupId>
-            <artifactId>azure-resourcemanager</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.azure.resourcemanager</groupId>
-            <artifactId>azure-resourcemanager-authorization</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.azure</groupId>
-            <artifactId>azure-identity</artifactId>
-        </dependency>
 
         <dependency>
             <groupId>io.kubernetes</groupId>
             <artifactId>client-java</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
         </dependency>
     </dependencies>
 
