@@ -8,7 +8,7 @@ Example can be easly modified, the current version shows how to delete requested
 Open the project in IntelliJ.
 Download the [Azure Toolkit for IntelliJ Plugin](https://plugins.jetbrains.com/plugin/8053-azure-toolkit-for-intellij)  
 You may need to upgrade your IntelliJ as some plugin functions are not available in the older versions.  
-Log in to Azure (Azure CLI):
+Log in to Azure (Azure CLI):  
 ![image](https://user-images.githubusercontent.com/15820051/107031298-3ec6fd00-67b2-11eb-93d3-2f4cc9782877.png)  
 Double click on `Function App` and select `Create`.  
 Setup settings for your needs.
