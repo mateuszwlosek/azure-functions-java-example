@@ -12,12 +12,9 @@ import io.kubernetes.client.openapi.ApiClient;
 import io.kubernetes.client.openapi.ApiException;
 import io.kubernetes.client.openapi.Configuration;
 import io.kubernetes.client.openapi.apis.CoreV1Api;
-import io.kubernetes.client.openapi.models.V1NamespaceList;
-import io.kubernetes.client.openapi.models.V1PodList;
 import io.kubernetes.client.util.Config;
 
 import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -55,7 +52,7 @@ public class HttpTriggerFunction {
 
 		if (!doesNamespaceExist(namespaceName)) {
 			return request.createResponseBuilder(HttpStatus.BAD_REQUEST)
-				.body("Namespace: " + podName +" does not exist")
+				.body("Namespace: " + namespaceName +" does not exist")
 				.build();
 		}
 
@@ -72,43 +69,24 @@ public class HttpTriggerFunction {
 			.build();
 	}
 
-	private boolean doesNamespaceExist(final String namespaceName) throws ApiException {
-		final V1NamespaceList namespaces = api.listNamespace(
-			null,
-			null,
-			null,
-			null,
-			null,
-			null,
-			null,
-			null,
-			null);
+	private static boolean doesNamespaceExist(final String namespaceName) {
+		try {
+			api.readNamespace(namespaceName, null, null, null);
+		} catch (final ApiException exc) {
+			return false;
+		}
 
-		return namespaces.getItems()
-			.stream()
-			.filter(namespace -> Objects.nonNull(namespace.getMetadata()) && Objects.nonNull(namespace.getMetadata().getName()) && namespace.getMetadata().getName().equals(namespaceName))
-			.filter(namespace -> Objects.nonNull(namespace.getMetadata().getName()) && namespace.getMetadata().getName().equals(namespaceName))
-			.anyMatch(namespace -> namespace.getMetadata().getName().equals(namespaceName));
+		return true;
 	}
 
-	private boolean doesPodExist(final String podName, final String namespaceName) throws ApiException {
-		final V1PodList pods = api.listNamespacedPod(
-			namespaceName,
-			null,
-			null,
-			null,
-			null,
-			null,
-			null,
-			null,
-			null,
-			null);
+	private static boolean doesPodExist(final String podName, final String namespaceName) throws ApiException {
+		try {
+			api.readNamespacedPod(podName, namespaceName, null, null, null);
+		} catch (final ApiException exc) {
+			return false;
+		}
 
-		return pods.getItems()
-			.stream()
-			.filter(pod -> Objects.nonNull(pod.getMetadata()) && Objects.nonNull(pod.getMetadata().getName()) && pod.getMetadata().getName().equals(podName))
-			.filter(pod -> Objects.nonNull(pod.getMetadata().getName()) && pod.getMetadata().getName().equals(podName))
-			.anyMatch(pod -> pod.getMetadata().getName().equals(podName));
+		return true;
 	}
 
 	private void deletePod(final Logger log, final String podName, final String namespaceName) throws ApiException {
